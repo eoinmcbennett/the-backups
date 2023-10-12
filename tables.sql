@@ -11,4 +11,4 @@ CREATE TABLE project(
     `tech_lead` SMALLINT NOT NULL UNSIGNED,
     `created` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP(),
     CHECK(`value` > 0)
-)
+);
