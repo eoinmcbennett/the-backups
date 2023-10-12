@@ -3,12 +3,12 @@ CREATE DATABASE thebackups_TaylorC;
 USE thebackups_TaylorC;
 
 CREATE TABLE client (
-    client_id SMALLINT UNSIGNED, 
-    name VARCHAR(255),
-    address VARCHAR(255), 
-    phone VARCHAR(11), 
-    employee_id SMALLINT UNSIGNED, 
-    win_date TIMESTAMP
+    `client_id` SMALLINT UNSIGNED, 
+    `name` VARCHAR(255),
+    `address` VARCHAR(255), 
+    `phone` VARCHAR(11), 
+    `employee_id` SMALLINT UNSIGNED, 
+    `win_date` TIMESTAMP
 );
 
 CREATE TABLE project(
@@ -23,7 +23,7 @@ CREATE TABLE project(
 );
 
 CREATE TABLE technology (
-    technology_id SMALLINT UNSIGNED, 
-    name VARCHAR(255)
+    `technology_id` SMALLINT UNSIGNED, 
+    `name` VARCHAR(255)
 );
 
