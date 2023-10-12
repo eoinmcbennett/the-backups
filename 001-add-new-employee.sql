@@ -8,7 +8,7 @@ CREATE TABLE employee_type (
 INSERT INTO employee_type(name) VALUES
 ('HR'),
 ('Sales'),
-('Management'),
+('Management')
 
 CREATE TABLE employee (
 	`employee_id` SMALLINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
