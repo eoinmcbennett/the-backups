@@ -1,4 +1,4 @@
-CREATE DATABASE thebackups_TaylorC;
+# CREATE DATABASE thebackups_TaylorC;
 
 USE thebackups_TaylorC;
 
@@ -21,7 +21,7 @@ CREATE TABLE employee (
     `type_id` TINYINT UNSIGNED NOT NULL,
     CHECK (LENGTH(sort_code) = 6),
     CHECK (LENGTH(account_number) = 8),
-    CHECK (LENGTH(nin) = 9),
+    CHECK (LENGTH(national_insurance) = 9),
     CHECK (salary > 0 AND salary <= 500000),
     FOREIGN KEY(type_id) REFERENCES employee_type(employee_type_id)
 );
