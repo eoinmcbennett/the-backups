@@ -15,6 +15,7 @@ CREATE TABLE employee (
     `sort_code` VARCHAR(6) NOT NULL,
     `account_number` VARCHAR(8) NOT NULL,
     `nin` VARCHAR(9) NOT NULL,
+    `commission` DECIMAL(10, 2) NULL,
     `username` VARCHAR(35) NOT NULL,
     `password` VARCHAR(35) NOT NULL,
     `type_id` TINYINT UNSIGNED NOT NULL,
