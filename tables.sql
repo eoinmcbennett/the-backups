@@ -23,7 +23,7 @@ CREATE TABLE project(
 );
 
 CREATE TABLE technology (
-technology_id SMALLINT UNSIGNED, 
-name VARCHAR(255)
+    technology_id SMALLINT UNSIGNED, 
+    name VARCHAR(255)
 );
 
