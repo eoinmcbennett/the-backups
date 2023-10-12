@@ -21,6 +21,16 @@ CREATE TABLE employee (
     CHECK (LENGTH(sort_code) = 6),
     CHECK (LENGHT(account_number = 8)),
     CHECK (LENGHT(nin = 9))
+
+);
+
+CREATE TABLE client (
+    `client_id` SMALLINT UNSIGNED,
+    `name` VARCHAR(255),
+    `address` VARCHAR(255),
+    `phone` VARCHAR(11),
+    `employee_id` SMALLINT UNSIGNED,
+    `win_date` TIMESTAMP
 );
 
 CREATE TABLE project(
@@ -33,3 +43,9 @@ CREATE TABLE project(
     `created` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP(),
     CHECK(`value` > 0)
 );
+
+CREATE TABLE technology (
+    `technology_id` SMALLINT UNSIGNED,
+    `name` VARCHAR(255)
+);
+
