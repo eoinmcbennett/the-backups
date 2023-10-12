@@ -3,8 +3,8 @@ CREATE DATABASE thebackups_TaylorC;
 USE thebackups_TaylorC;
 
 CREATE TABLE employee_type (
-	`employee_type_id` TINYINT UNSIGNED AUTO_INCREMENT,
-    `name` VARCHAR(30) NOT NULL,
+	`employee_type_id` TINYINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    `name` VARCHAR(30) NOT NULL
 );
 
 CREATE TABLE employee (
@@ -19,15 +19,15 @@ CREATE TABLE employee (
     `password` VARCHAR(35) NOT NULL,
     `type_id` TINYINT UNSIGNED NOT NULL,
     CHECK (LENGTH(sort_code) = 6),
-    CHECK (LENGHT(account_number = 8)),
-    CHECK (LENGHT(nin = 9)),
+    CHECK (LENGTH(account_number) = 8),
+    CHECK (LENGTH(nin) = 9),
     CHECK (salary > 0 AND salary <= 500000)
 );
 
-ALTER TABLE employee ADD CONSTRINT fk_employee_employee_type FOREIGN KEY(type_id) REFERENCES employee(type_id);
+ALTER TABLE employee ADD CONSTRAINT fk_employee_employee_type FOREIGN KEY(type_id) REFERENCES employee_type(employee_type_id);
 
-CREATE TABLE client (
-    `client_id` SMALLINT UNSIGNED,
+CREATE TABLE `client` (
+    `client_id` SMALLINT UNSIGNED PRIMARY KEY,
     `name` VARCHAR(255) NOT NULL,
     `address` VARCHAR(255) NOT NULL,
     `phone` VARCHAR(11) NOT NULL,
@@ -35,24 +35,24 @@ CREATE TABLE client (
     `win_date` TIMESTAMP NULL
 );
 
-ALTER TABLE client ADD CONSTRAINT fk_client_employee FOREIGN KEY(employee_id) REFERENCES client(employee_id);
+ALTER TABLE `client` ADD CONSTRAINT fk_client_employee FOREIGN KEY(employee_id) REFERENCES employee(employee_id);
 
 CREATE TABLE project(
-    `project_id` AUTO_INCREMENT PRIMARY KEY SMALLINT UNSIGNED,
+    `project_id` SMALLINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     `name` VARCHAR(50) NOT NULL,
     `value` DECIMAL(10) NOT NULL,
-    `client_id` SMALLINT NOT NULL UNSIGNED,
-    `status` TINYINT(2) NOT NULL UNSIGNED DEFAULT 0,
-    `tech_lead` SMALLINT NOT NULL UNSIGNED,
+    `client_id` SMALLINT UNSIGNED NOT NULL,
+    `status` TINYINT(2) UNSIGNED NOT NULL DEFAULT 0,
+    `tech_lead` SMALLINT UNSIGNED NOT NULL,
     `created` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP(),
     CHECK(`value` > 0)
 );
 
-ALTER TABLE project ADD CONSTRAINT fk_project_client FOREIGN KEY(client_id) REFRENCES client(client_id);
-ALTER TABLE project ADD CONSTRAINT fk_project_tech_lead FOREIGN KEY(tech_lead) REFRENCES employee(employee_id);
+ALTER TABLE project ADD CONSTRAINT fk_project_client FOREIGN KEY(client_id) REFERENCES `client`(client_id);
+ALTER TABLE project ADD CONSTRAINT fk_project_tech_lead FOREIGN KEY(tech_lead) REFERENCES employee(employee_id);
 
 CREATE TABLE technology (
-    `technology_id` AUTO_INCREMENT PRIMARY KEY SMALLINT UNSIGNED,
+    `technology_id` SMALLINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     `name` VARCHAR(255) NOT NULL
 );
 
@@ -60,7 +60,7 @@ CREATE TABLE employee_technology (
     employee_id SMALLINT UNSIGNED NOT NULL,
     technology_id SMALLINT UNSIGNED NOT NULL,
     PRIMARY KEY(employee_id,technology_id)
-)
+);
 
 ALTER TABLE employee_technology ADD CONSTRAINT fk_employee_technology FOREIGN KEY(employee_id) REFERENCES employee(employee_id);
 ALTER TABLE employee_technology ADD CONSTRAINT fk_emp_technology_technology FOREIGN KEY(technology_id) REFERENCES technology(technology_id);
@@ -69,13 +69,13 @@ CREATE TABLE project_technology(
     project_id SMALLINT UNSIGNED NOT NULL,
     technology_id SMALLINT UNSIGNED NOT NULL,
     PRIMARY KEY(project_id,technology_id)
-)
+);
 
 ALTER TABLE project_technology ADD CONSTRAINT fk_project_technology_project FOREIGN KEY(project_id) REFERENCES project(project_id);
 ALTER TABLE project_technology ADD CONSTRAINT fk_project_technology_technology FOREIGN KEY(technology_id) REFERENCES technology(technology_id);
 
 CREATE TABLE employee_project(
-    employee_project_id AUTO_INCREMENT PRIMARY KEY SMALLINT UNSIGNED,
+    employee_project_id SMALLINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     employee_id SMALLINT UNSIGNED NOT NULL,
     project_id SMALLINT UNSIGNED NOT NULL,
     active TINYINT(2) UNSIGNED NOT NULL DEFAULT 0,
@@ -84,4 +84,3 @@ CREATE TABLE employee_project(
 
 ALTER TABLE employee_project ADD CONSTRAINT fk_employee_project_employee FOREIGN KEY(employee_id) REFERENCES employee(employee_id);
 ALTER TABLE employee_project ADD CONSTRAINT fk_employee_project_project FOREIGN KEY(project_id) REFERENCES project(project_id);
-
