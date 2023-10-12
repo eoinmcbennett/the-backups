@@ -1,0 +1,1 @@
+INSERT INTO client(name,address,phone) VALUES('Test Client','Testing test street','0284173423');
